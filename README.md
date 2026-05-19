@@ -1,6 +1,6 @@
 # Gymnasium Game Wrapper
 
-Signal Collector is a small 2D collection-and-avoidance game wrapped as a Gymnasium-compatible reinforcement learning environment. The agent moves around a grid, collects signal tokens, avoids hazards, and faces adaptive difficulty stages that change hazards, rewards, episode length, and hazard movement.
+A 2D collection-and-avoidance game (SignalCollector) wrapped as a Gymnasium-compatible RL environment with a YAML-driven difficulty schedule.
 
 The project is intentionally lightweight. It focuses on the engineering pattern of connecting game or simulation logic to a standard RL interface without making the game itself unnecessarily complex.
 
@@ -81,6 +81,11 @@ hard              5       -1.22             0.00
 expert            9       -0.75             0.00
 ```
 
+> **Note:** The results above use a random policy baseline.
+> Zero completion rates on harder stages, such as expert difficulty, are expected.
+> A random agent has no directional strategy, so these numbers establish the
+> baseline floor rather than indicating a bug.
+
 ## Environment API
 
 ```python
@@ -89,6 +94,15 @@ from signal_collector import SignalCollectorEnv
 env = SignalCollectorEnv()
 observation, info = env.reset()
 observation, reward, terminated, truncated, info = env.step(4)
+```
+
+The environment can also be created by ID after importing the package:
+
+```python
+import gymnasium
+import signal_collector  # triggers registration
+
+env = gymnasium.make("SignalCollector-v0")
 ```
 
 Actions:
