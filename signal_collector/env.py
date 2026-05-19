@@ -48,7 +48,12 @@ class SignalCollectorEnv(gym.Env):
                 "signals": spaces.MultiBinary(max_cells),
                 "hazards": spaces.MultiBinary(max_cells),
                 "difficulty": spaces.Discrete(len(self.config.stages)),
-                "remaining_steps": spaces.Box(0, max(stage.max_steps for stage in self.config.stages), shape=(1,), dtype=np.int32),
+                "remaining_steps": spaces.Box(
+                    0,
+                    max(stage.max_steps for stage in self.config.stages),
+                    shape=(1,),
+                    dtype=np.int32,
+                ),
             }
         )
 
@@ -115,7 +120,13 @@ class SignalCollectorEnv(gym.Env):
             mask[row * self.config.grid_size + col] = 1
         return mask
 
-    def _info(self, *, last_reward: float, collected_signal: bool = False, hit_hazard: bool = False) -> dict[str, Any]:
+    def _info(
+        self,
+        *,
+        last_reward: float,
+        collected_signal: bool = False,
+        hit_hazard: bool = False,
+    ) -> dict[str, Any]:
         return {
             "episode": self.episode_index,
             "difficulty": self.current_stage.name,

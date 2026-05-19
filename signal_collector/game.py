@@ -122,6 +122,8 @@ class SignalCollectorGame:
         return set(self.rng.sample(available, count))
 
     def _move_hazards(self) -> None:
+        """Move each hazard one local step while avoiding signals and the agent."""
+
         occupied = {self.agent_position} | self.signal_positions
         moved: set[Position] = set()
         for hazard in sorted(self.hazard_positions):

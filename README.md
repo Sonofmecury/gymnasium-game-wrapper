@@ -58,7 +58,9 @@ Run tests:
 python -m pytest
 ```
 
-## Example Demo Output
+## Quick Demo Output
+
+`examples/inspect_difficulty_changes.py` shows the configured stage transitions:
 
 ```text
 episode=00 difficulty=easy    status=transition hazards=1 signals=3
