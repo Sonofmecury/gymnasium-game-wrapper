@@ -49,7 +49,10 @@ def load_difficulty_config(path: str | Path) -> DifficultyConfig:
         raw = yaml.safe_load(file)
 
     stages = tuple(
-        sorted((_parse_stage(item) for item in raw["difficulties"]), key=lambda stage: stage.starts_at_episode)
+        sorted(
+            (_parse_stage(item) for item in raw["difficulties"]),
+            key=lambda stage: stage.starts_at_episode,
+        )
     )
     if not stages or stages[0].starts_at_episode != 0:
         raise ValueError("At least one difficulty stage must start at episode 0")

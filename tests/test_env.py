@@ -11,7 +11,13 @@ def test_env_reset_returns_valid_observation() -> None:
 
     observation, info = env.reset()
 
-    assert set(observation) == {"agent", "signals", "hazards", "difficulty", "remaining_steps"}
+    assert set(observation) == {
+        "agent",
+        "signals",
+        "hazards",
+        "difficulty",
+        "remaining_steps",
+    }
     assert observation["agent"].dtype == np.int32
     assert info["difficulty"] == "easy"
 
@@ -22,7 +28,13 @@ def test_step_returns_gymnasium_format() -> None:
 
     observation, reward, terminated, truncated, info = env.step(4)
 
-    assert set(observation) == {"agent", "signals", "hazards", "difficulty", "remaining_steps"}
+    assert set(observation) == {
+        "agent",
+        "signals",
+        "hazards",
+        "difficulty",
+        "remaining_steps",
+    }
     assert isinstance(reward, float)
     assert isinstance(terminated, bool)
     assert isinstance(truncated, bool)

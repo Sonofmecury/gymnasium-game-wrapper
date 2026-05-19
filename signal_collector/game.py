@@ -7,7 +7,6 @@ import random
 
 from signal_collector.config import DifficultyStage
 
-
 Position = tuple[int, int]
 
 

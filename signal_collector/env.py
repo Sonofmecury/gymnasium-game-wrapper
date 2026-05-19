@@ -9,12 +9,17 @@ import gymnasium as gym
 import numpy as np
 from gymnasium import spaces
 
-from signal_collector.config import DifficultyConfig, DifficultyStage, load_difficulty_config
+from signal_collector.config import (
+    DifficultyConfig,
+    DifficultyStage,
+    load_difficulty_config,
+)
 from signal_collector.game import Position, SignalCollectorGame
 from signal_collector.renderer import TerminalRenderer
 
-
-DEFAULT_CONFIG_PATH = Path(__file__).resolve().parents[1] / "configs" / "difficulty.yaml"
+DEFAULT_CONFIG_PATH = (
+    Path(__file__).resolve().parents[1] / "configs" / "difficulty.yaml"
+)
 
 
 class SignalCollectorEnv(gym.Env):
@@ -44,7 +49,9 @@ class SignalCollectorEnv(gym.Env):
         max_cells = self.config.grid_size * self.config.grid_size
         self.observation_space = spaces.Dict(
             {
-                "agent": spaces.Box(0, self.config.grid_size - 1, shape=(2,), dtype=np.int32),
+                "agent": spaces.Box(
+                    0, self.config.grid_size - 1, shape=(2,), dtype=np.int32
+                ),
                 "signals": spaces.MultiBinary(max_cells),
                 "hazards": spaces.MultiBinary(max_cells),
                 "difficulty": spaces.Discrete(len(self.config.stages)),
@@ -74,7 +81,9 @@ class SignalCollectorEnv(gym.Env):
         self.game.reset(self.current_stage)
         return self._observation(), self._info(last_reward=0.0)
 
-    def step(self, action: int) -> tuple[dict[str, np.ndarray | int], float, bool, bool, dict[str, Any]]:
+    def step(
+        self, action: int
+    ) -> tuple[dict[str, np.ndarray | int], float, bool, bool, dict[str, Any]]:
         if not self.action_space.contains(action):
             raise ValueError("Invalid action; expected an integer in [0, 4]")
 
@@ -111,7 +120,9 @@ class SignalCollectorEnv(gym.Env):
             "signals": self._position_mask(self.game.signal_positions),
             "hazards": self._position_mask(self.game.hazard_positions),
             "difficulty": self.config.stages.index(self.current_stage),
-            "remaining_steps": np.array([self.current_stage.max_steps - self.game.step_count], dtype=np.int32),
+            "remaining_steps": np.array(
+                [self.current_stage.max_steps - self.game.step_count], dtype=np.int32
+            ),
         }
 
     def _position_mask(self, positions: set[Position]) -> np.ndarray:
