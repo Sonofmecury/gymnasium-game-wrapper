@@ -1,0 +1,45 @@
+grid_size: 8
+difficulties:
+  - name: easy
+    starts_at_episode: 0
+    signal_count: 3
+    hazard_count: 1
+    max_steps: 45
+    signal_reward: 1.0
+    hazard_penalty: -0.6
+    step_penalty: -0.01
+    completion_bonus: 1.5
+    moving_hazards: false
+
+  - name: medium
+    starts_at_episode: 5
+    signal_count: 4
+    hazard_count: 3
+    max_steps: 40
+    signal_reward: 1.0
+    hazard_penalty: -0.8
+    step_penalty: -0.015
+    completion_bonus: 1.8
+    moving_hazards: false
+
+  - name: hard
+    starts_at_episode: 10
+    signal_count: 4
+    hazard_count: 5
+    max_steps: 34
+    signal_reward: 1.1
+    hazard_penalty: -1.0
+    step_penalty: -0.02
+    completion_bonus: 2.0
+    moving_hazards: false
+
+  - name: expert
+    starts_at_episode: 15
+    signal_count: 5
+    hazard_count: 6
+    max_steps: 30
+    signal_reward: 1.2
+    hazard_penalty: -1.2
+    step_penalty: -0.025
+    completion_bonus: 2.5
+    moving_hazards: true
